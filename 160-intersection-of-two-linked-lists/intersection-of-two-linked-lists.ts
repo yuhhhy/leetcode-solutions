@@ -1,5 +1,5 @@
 // Problem: https://leetcode.cn/problems/intersection-of-two-linked-lists/
-// Accepted at: 2025年9月24日 22:15
+// Accepted at: 2026年7月27日 21:57
 
 /**
  * Definition for singly-linked list.
@@ -16,7 +16,7 @@
 function getIntersectionNode(headA: ListNode | null, headB: ListNode | null): ListNode | null {
     let pA = headA;
     let pB = headB;
-    while(pA !== pB){
+    while (pA !== pB) {
         pA = pA === null ? headB : pA.next;
         pB = pB === null ? headA : pB.next;
     }
