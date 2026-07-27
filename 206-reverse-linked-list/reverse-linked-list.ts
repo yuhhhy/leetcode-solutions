@@ -1,5 +1,5 @@
 // Problem: https://leetcode.cn/problems/reverse-linked-list/
-// Accepted at: 2026年6月12日 11:12
+// Accepted at: 2026年7月27日 22:53
 
 /**
  * Definition for singly-linked list.
@@ -14,15 +14,11 @@
  */
 
 function reverseList(head: ListNode | null): ListNode | null {
-    let prev = null;
-    let curr = head;
+    if (!head || !head.next) return head;
 
-    while (curr) {
-        const next = curr.next;
-        curr.next = prev;
-        prev = curr;
-        curr = next;
-    }
+    const newHead = reverseList(head.next);
+    head.next.next = head;
+    head.next = null;
 
-    return prev;
+    return newHead;
 };
