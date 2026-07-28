@@ -1,28 +1,42 @@
 // Problem: https://leetcode.cn/problems/linked-list-cycle-ii/
-// Accepted at: 2026年2月6日 23:30
+// Accepted at: 2026年7月28日 10:46
+
+/**
+ * Definition for singly-linked list.
+ * class ListNode {
+ *     val: number
+ *     next: ListNode | null
+ *     constructor(val?: number, next?: ListNode | null) {
+ *         this.val = (val===undefined ? 0 : val)
+ *         this.next = (next===undefined ? null : next)
+ *     }
+ * }
+ */
 
 function detectCycle(head: ListNode | null): ListNode | null {
-    if (!head) return null
-    let slow: ListNode | null = head
-    let fast: ListNode | null = head
-    let hasCycle = false
+    if (!head || !head.next) return null;
 
-    while (fast !== null && fast.next !== null) {
-        slow = slow.next
-        fast = fast.next.next
+    let fast = head;
+    let slow = head;
+    let hasCycle = false;
+
+    while (fast && fast.next) {
+        fast = fast.next.next;
+        slow = slow.next;
         if (fast === slow) {
-            hasCycle = true
-            break
+            hasCycle = true;
+            break;
         }
     }
-    if (!hasCycle) return null
-    // 从起点到入口的距离，等于从相遇点到入口的距离
-    // 从头节点出发一个指针，从相遇点出发一个指针，它们最终会在入环点相遇
-    // 寻找入环点   
-    fast = head
+
+    if (!hasCycle) return null;
+
+    // a = kc - b
+    fast = head;
     while (fast !== slow) {
-        fast = fast.next
-        slow = slow.next
+        fast = fast.next;
+        slow = slow.next;
     }
-    return fast
+
+    return fast;
 };
