@@ -1,5 +1,5 @@
 // Problem: https://leetcode.cn/problems/remove-nth-node-from-end-of-list/
-// Accepted at: 2026年6月12日 16:12
+// Accepted at: 2026年7月31日 22:53
 
 /**
  * Definition for singly-linked list.
@@ -14,27 +14,26 @@
  */
 
 function removeNthFromEnd(head: ListNode | null, n: number): ListNode | null {
-    let sz = 1;
+    const dummy = new ListNode(-1, head);
+    let size = 1;
     let currentNode = head;
-    let dummyNode = new ListNode(0, head);
-    
+
     // 计算节点数
-    while(currentNode.next !== null){
+    while (currentNode.next !== null) {
         currentNode = currentNode.next;
-        sz++;
+        size++;
     }
 
     // 删除的前一个节点和删除的节点
-    let pre = dummyNode;
+    let pre = dummy;
     let target = head;
-    
-    // 正书第 sz - n + 1 个节点
-    for(let i = 1; i < sz - n + 1; i++){
+
+    // 正数第 size - n + 1 个节点
+    for (let i = 0; i < size - n; i++) {
         pre = pre.next;
         target = target.next;
     }
     pre.next = target.next;
-    
-    // 只有一个节点的情况
-    return dummyNode.next;
+
+    return dummy.next;
 };
