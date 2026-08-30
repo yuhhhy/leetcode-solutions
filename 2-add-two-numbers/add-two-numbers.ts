@@ -1,5 +1,5 @@
 // Problem: https://leetcode.cn/problems/add-two-numbers/
-// Accepted at: 2026年8月2日 20:09
+// Accepted at: 2026年8月30日 16:21
 
 /**
  * Definition for singly-linked list.
@@ -14,24 +14,21 @@
  */
 
 function addTwoNumbers(l1: ListNode | null, l2: ListNode | null): ListNode | null {
+    const dummy = new ListNode();
     let carry = 0;
-    const dummy = new ListNode(0);
-    let current = dummy;
+    let curr = dummy;
 
     while (l1 || l2 || carry) {
-        const v1 = l1?.val ?? 0;
-        const v2 = l2?.val ?? 0;
+        const n1 = l1 ? l1.val : 0;
+        const n2 = l2 ? l2.val : 0;
+        const digit = (n1 + n2 + carry) % 10;
+        carry = Math.floor((n1 + n2 + carry) / 10);
 
-        const sum = v1 + v2 + carry;
-        const digit = sum % 10;
-        carry = Math.floor(sum / 10);
-
-        const node = new ListNode(digit);
-        current.next = node;
-        current = node;
+        curr.next = new ListNode(digit);
+        curr = curr.next;
         if (l1) l1 = l1.next;
         if (l2) l2 = l2.next;
     }
-    
+
     return dummy.next;
 };
