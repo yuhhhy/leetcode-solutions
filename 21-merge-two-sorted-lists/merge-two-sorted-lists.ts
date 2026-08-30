@@ -1,5 +1,5 @@
 // Problem: https://leetcode.cn/problems/merge-two-sorted-lists/
-// Accepted at: 2026年7月29日 16:31
+// Accepted at: 2026年8月30日 15:05
 
 /**
  * Definition for singly-linked list.
@@ -14,22 +14,21 @@
  */
 
 function mergeTwoLists(list1: ListNode | null, list2: ListNode | null): ListNode | null {
-    let dummy = new ListNode();
-    let p1 = list1, p2 = list2;
+    const dummy = new ListNode();
     let curr = dummy;
 
-    while (p1 !== null && p2 !== null) {
-        if (p1.val < p2.val) {
-            curr.next = p1;
-            p1 = p1.next;
+    while (list1 && list2) {
+        if (list1.val < list2.val) {
+            curr.next = list1;
+            list1 = list1.next;
         } else {
-            curr.next = p2;
-            p2 = p2.next;
+            curr.next = list2;
+            list2 = list2.next;
         }
         curr = curr.next;
     }
 
-    curr.next = p1 === null ? p2 : p1;
-    
+    curr.next = list1 ?? list2;
+
     return dummy.next;
 };
