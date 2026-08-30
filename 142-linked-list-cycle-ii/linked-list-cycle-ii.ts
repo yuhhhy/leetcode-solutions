@@ -1,5 +1,5 @@
 // Problem: https://leetcode.cn/problems/linked-list-cycle-ii/
-// Accepted at: 2026年7月28日 10:46
+// Accepted at: 2026年8月30日 14:53
 
 /**
  * Definition for singly-linked list.
@@ -14,29 +14,22 @@
  */
 
 function detectCycle(head: ListNode | null): ListNode | null {
-    if (!head || !head.next) return null;
-
-    let fast = head;
     let slow = head;
-    let hasCycle = false;
+    let fast = head;
 
     while (fast && fast.next) {
         fast = fast.next.next;
         slow = slow.next;
+
         if (fast === slow) {
-            hasCycle = true;
-            break;
+            let node = head;
+            while (node !== slow) {
+                node = node.next;
+                slow = slow.next;
+            }
+            return node;
         }
     }
 
-    if (!hasCycle) return null;
-
-    // a = kc - b
-    fast = head;
-    while (fast !== slow) {
-        fast = fast.next;
-        slow = slow.next;
-    }
-
-    return fast;
+    return null;
 };
