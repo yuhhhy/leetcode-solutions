@@ -1,5 +1,5 @@
 // Problem: https://leetcode.cn/problems/binary-tree-level-order-traversal/
-// Accepted at: 2026年6月12日 17:17
+// Accepted at: 2026年9月1日 23:54
 
 /**
  * Definition for a binary tree node.
@@ -16,25 +16,21 @@
  */
 
 function levelOrder(root: TreeNode | null): number[][] {
-    let result: number[][] = [];
-    let queue: TreeNode[] = [];
+    const result: number[][] = []
+    const queue: TreeNode[] = [];
 
     if (root) queue.push(root);
 
     while (queue.length > 0) {
-        // 每次队列里的都是同一层的节点，清空
-        const size = queue.length;
-        // 当前层的结果
-        const level: number[] = [];
-        // 遍历当前层节点
-        for (let i = 0; i < size; i++) {
-            const node = queue.shift()!;
-            level.push(node.val);
-            // 下一层入队
-            if(node.left) queue.push(node.left);
-            if(node.right) queue.push(node.right);
+        const sz = queue.length;
+        const levelResult: number[] = [];
+        for (let i = 0; i < sz; i++) {
+            const node = queue.shift();
+            if (node.left) queue.push(node.left);
+            if (node.right) queue.push(node.right);
+            levelResult.push(node.val);
         }
-        result.push(level);
+        result.push(levelResult);
     }
     return result;
 };
