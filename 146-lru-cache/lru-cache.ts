@@ -1,12 +1,12 @@
 // Problem: https://leetcode.cn/problems/lru-cache/
-// Accepted at: 2026年7月1日 00:07
+// Accepted at: 2026年9月1日 23:52
 
 class LRUCache {
-    cache: Map<number, number>;
     capacity: number;
+    cache: Map<number, number>;
     constructor(capacity: number) {
-        this.cache = new Map();
         this.capacity = capacity;
+        this.cache = new Map<number, number>();
     }
 
     get(key: number): number {
@@ -15,19 +15,21 @@ class LRUCache {
             this.cache.delete(key);
             this.cache.set(key, val);
             return val;
-        } else {
-            return -1;
         }
+        return -1;
     }
 
     put(key: number, value: number): void {
         if (this.cache.has(key)) {
             this.cache.delete(key);
-        }
-        this.cache.set(key, value);
-
-        if (this.cache.size > this.capacity) {
-            this.cache.delete(this.cache.keys().next().value);
+            this.cache.set(key, value);
+        } else {
+            if (this.cache.size >= this.capacity) {
+                this.cache.delete(this.cache.keys().next().value);
+                this.cache.set(key, value);
+            } else {
+                this.cache.set(key, value);
+            }
         }
     }
 }
