@@ -1,5 +1,5 @@
 // Problem: https://leetcode.cn/problems/diameter-of-binary-tree/
-// Accepted at: 2026年3月8日 15:48
+// Accepted at: 2026年9月1日 23:59
 
 /**
  * Definition for a binary tree node.
@@ -16,19 +16,17 @@
  */
 
 function diameterOfBinaryTree(root: TreeNode | null): number {
-    let maxDiameter = 0;
-    // 深度定义：节点数
-    // 这个函数要递归计算所有节点的深度并返回，并更新maxDiameter
+    let ans = 0;
+
     function depth(node: TreeNode | null): number {
-        if (node === null) return 0;
-        // 递归计算左右子树的深度
-        const left  = depth(node.left);
-        const right  = depth(node.right);
-        // 当前节点的最大直径 = 左深度 + 右深度
-        maxDiameter = Math.max(maxDiameter, left + right );
-        // 返回当前节点的深度
+        if (!node) return 0;
+        const left = depth(node.left);
+        const right = depth(node.right);
+        ans = Math.max(ans, left + right);
         return Math.max(left, right) + 1;
     }
+
     depth(root);
-    return maxDiameter;
+
+    return ans;
 };
