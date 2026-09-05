@@ -1,5 +1,5 @@
 // Problem: https://leetcode.cn/problems/3sum/
-// Accepted at: 2026年7月8日 09:57
+// Accepted at: 2026年9月5日 16:38
 
 function threeSum(nums: number[]): number[][] {
     nums.sort((a, b) => a - b);
@@ -18,7 +18,7 @@ function threeSum(nums: number[]): number[][] {
                 while (left < right && nums[left + 1] === nums[left]) left++;
                 while (left < right && nums[right - 1] === nums[right]) right--;
                 left++;
-                right;
+                right--;
             } else if (sum < 0) {
                 left++;
             } else {
