@@ -1,5 +1,5 @@
 // Problem: https://leetcode.cn/problems/flatten-binary-tree-to-linked-list/
-// Accepted at: 2026年9月6日 13:20
+// Accepted at: 2026年9月6日 15:13
 
 /**
  * Definition for a binary tree node.
@@ -19,24 +19,15 @@
  Do not return anything, modify root in-place instead.
  */
 function flatten(root: TreeNode | null): void {
-    const list: TreeNode[] = [];
+    let nextNode = null;
 
     function travese(node: TreeNode | null): void {
         if (!node) return;
-        list.push(node);
+        travese(node.right);
         travese(node.left);
-        travese(node.right)
+        node.left = null;
+        node.right = nextNode;
+        nextNode = node;
     }
     travese(root);
-
-    for (let i = 0; i < list.length; i++) {
-        if (i > 0) {
-            list[i - 1].left = null;
-            list[i - 1].right = list[i];
-        }
-        if (i === list.length - 1) {
-            list[i].left = null;
-            list[i].right = null;
-        }
-    }
 };
