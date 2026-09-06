@@ -1,5 +1,5 @@
 // Problem: https://leetcode.cn/problems/binary-tree-right-side-view/
-// Accepted at: 2026年9月6日 12:55
+// Accepted at: 2026年9月6日 13:04
 
 /**
  * Definition for a binary tree node.
@@ -16,21 +16,21 @@
  */
 
 function rightSideView(root: TreeNode | null): number[] {
+    const queue: TreeNode[] = [];
     const results: number[] = [];
-    let maxDepth = 0
 
-    function view(node: TreeNode | null, parentDepth: number): void {
-        if (!node) return;
-        
-        const currDepth = parentDepth + 1;
-        if (currDepth > maxDepth) {
-            results.push(node.val);
-            maxDepth = currDepth;
+    if (root) queue.push(root);
+    while (queue.length > 0) {
+        const size = queue.length;
+        for (let i = size; i > 0; i--) {
+            const node = queue.shift();
+            if (i === size) {
+                results.push(node.val);
+            }
+            if (node.right) queue.push(node.right);
+            if (node.left) queue.push(node.left);
         }
-        view(node.right, currDepth);
-        view(node.left, currDepth);
     }
-    view(root, 0);
 
     return results;
 };
