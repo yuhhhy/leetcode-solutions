@@ -1,5 +1,5 @@
 // Problem: https://leetcode.cn/problems/min-stack/
-// Accepted at: 2026年9月12日 17:09
+// Accepted at: 2026年9月13日 17:43
 
 class MinStack {
     private stack: number[];
@@ -11,10 +11,10 @@ class MinStack {
 
     push(value: number): void {
         this.stack.push(value);
-        const currentMin = this.minStack.length === 0
-            ? value
-            : Math.min(value, this.minStack.at(-1));
-        this.minStack.push(currentMin);
+        const min = this.minStack.length === 0 
+        ? value 
+        : Math.min(this.minStack.at(-1), value);
+        this.minStack.push(min);
     }
 
     pop(): void {
