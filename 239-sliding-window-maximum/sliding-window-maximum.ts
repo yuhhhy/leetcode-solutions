@@ -1,21 +1,25 @@
 // Problem: https://leetcode.cn/problems/sliding-window-maximum/
-// Accepted at: 2026年9月19日 19:02
+// Accepted at: 2026年9月26日 11:45
 
 function maxSlidingWindow(nums: number[], k: number): number[] {
-    const dequeue: number[] = [];
     const result: number[] = [];
+    // 队列存储下标
+    const dequeue: number[] = [];
 
     for (let i = 0; i < nums.length; i++) {
-        while (dequeue.length > 0 && nums[i] >= nums[dequeue.at(-1)]) {
+        // 入队
+        while (dequeue.length > 0 && nums[dequeue.at(-1)] <= nums[i]) {
             dequeue.pop();
         }
         dequeue.push(i);
 
+        // 出队
         if (dequeue[0] < i - k + 1) {
             dequeue.shift();
         }
 
-        if(i - k + 1 >= 0){
+        // 记录最大值
+        if (i - k + 1 >= 0) {
             result.push(nums[dequeue[0]]);
         }
     }
