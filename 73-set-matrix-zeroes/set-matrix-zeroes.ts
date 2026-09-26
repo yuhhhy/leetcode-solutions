@@ -1,5 +1,5 @@
 // Problem: https://leetcode.cn/problems/set-matrix-zeroes/
-// Accepted at: 2026年7月20日 17:14
+// Accepted at: 2026年9月26日 12:35
 
 /**
  Do not return anything, modify matrix in-place instead.
@@ -12,16 +12,15 @@ function setZeroes(matrix: number[][]): void {
 
     for (let i = 0; i < m; i++) {
         for (let j = 0; j < n; j++) {
-            if(matrix[i][j] === 0){
+            if (matrix[i][j] === 0) {
                 rows[i] = 0;
                 cols[j] = 0;
             }
         }
     }
-
     for (let i = 0; i < m; i++) {
         for (let j = 0; j < n; j++) {
-            if(rows[i] === 0 || cols[j] === 0){
+            if (rows[i] === 0 || cols[j] === 0) {
                 matrix[i][j] = 0;
             }
         }
